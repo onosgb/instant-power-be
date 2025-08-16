@@ -38,6 +38,11 @@ export type Transaction = $Result.DefaultSelection<Prisma.$TransactionPayload>
  * 
  */
 export type ContactUs = $Result.DefaultSelection<Prisma.$ContactUsPayload>
+/**
+ * Model Disco
+ * 
+ */
+export type Disco = $Result.DefaultSelection<Prisma.$DiscoPayload>
 
 /**
  * Enums
@@ -67,12 +72,12 @@ export type StatusEnum = (typeof StatusEnum)[keyof typeof StatusEnum]
 
 export const PaymentStatus: {
   Active: 'Active',
+  Success: 'Success',
   Trialing: 'Trialing',
   PastDue: 'PastDue',
   Unpaid: 'Unpaid',
   Canceled: 'Canceled',
-  Incomplete: 'Incomplete',
-  Expired: 'Expired',
+  Failed: 'Failed',
   Paused: 'Paused'
 };
 
@@ -140,13 +145,6 @@ export class PrismaClient<
    * Disconnect from the database
    */
   $disconnect(): $Utils.JsPromise<void>;
-
-  /**
-   * Add a middleware
-   * @deprecated since 4.16.0. For new code, prefer client extensions instead.
-   * @see https://pris.ly/d/extensions
-   */
-  $use(cb: Prisma.Middleware): void
 
 /**
    * Executes a prepared raw query and returns the number of affected rows.
@@ -266,6 +264,16 @@ export class PrismaClient<
     * ```
     */
   get contactUs(): Prisma.ContactUsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.disco`: Exposes CRUD operations for the **Disco** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Discos
+    * const discos = await prisma.disco.findMany()
+    * ```
+    */
+  get disco(): Prisma.DiscoDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -324,8 +332,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.13.0
-   * Query Engine version: 361e86d0ea4987e9f53a565309b3eed797a6bcbd
+   * Prisma Client JS version: 6.14.0
+   * Query Engine version: 717184b7b35ea05dfa71a3236b7af656013e1e49
    */
   export type PrismaVersion = {
     client: string
@@ -710,7 +718,8 @@ export namespace Prisma {
     Token: 'Token',
     Verification: 'Verification',
     Transaction: 'Transaction',
-    ContactUs: 'ContactUs'
+    ContactUs: 'ContactUs',
+    Disco: 'Disco'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -729,7 +738,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "token" | "verification" | "transaction" | "contactUs"
+      modelProps: "user" | "token" | "verification" | "transaction" | "contactUs" | "disco"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1103,6 +1112,80 @@ export namespace Prisma {
           }
         }
       }
+      Disco: {
+        payload: Prisma.$DiscoPayload<ExtArgs>
+        fields: Prisma.DiscoFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DiscoFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscoPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DiscoFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscoPayload>
+          }
+          findFirst: {
+            args: Prisma.DiscoFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscoPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DiscoFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscoPayload>
+          }
+          findMany: {
+            args: Prisma.DiscoFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscoPayload>[]
+          }
+          create: {
+            args: Prisma.DiscoCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscoPayload>
+          }
+          createMany: {
+            args: Prisma.DiscoCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DiscoCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscoPayload>[]
+          }
+          delete: {
+            args: Prisma.DiscoDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscoPayload>
+          }
+          update: {
+            args: Prisma.DiscoUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscoPayload>
+          }
+          deleteMany: {
+            args: Prisma.DiscoDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DiscoUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DiscoUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscoPayload>[]
+          }
+          upsert: {
+            args: Prisma.DiscoUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscoPayload>
+          }
+          aggregate: {
+            args: Prisma.DiscoAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDisco>
+          }
+          groupBy: {
+            args: Prisma.DiscoGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DiscoGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DiscoCountArgs<ExtArgs>
+            result: $Utils.Optional<DiscoCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1200,6 +1283,7 @@ export namespace Prisma {
     verification?: VerificationOmit
     transaction?: TransactionOmit
     contactUs?: ContactUsOmit
+    disco?: DiscoOmit
   }
 
   /* Types for Logging */
@@ -1257,25 +1341,6 @@ export namespace Prisma {
     | 'runCommandRaw'
     | 'findRaw'
     | 'groupBy'
-
-  /**
-   * These options are being passed into the middleware as "params"
-   */
-  export type MiddlewareParams = {
-    model?: ModelName
-    action: PrismaAction
-    args: any
-    dataPath: string[]
-    runInTransaction: boolean
-  }
-
-  /**
-   * The `T` type makes sure, that the `return proceed` is not forgotten in the middleware implementation
-   */
-  export type Middleware<T = any> = (
-    params: MiddlewareParams,
-    next: (params: MiddlewareParams) => $Utils.JsPromise<T>,
-  ) => $Utils.JsPromise<T>
 
   // tested in getLogLevel.test.ts
   export function getLogLevel(log: Array<LogLevel | LogDefinition>): LogLevel | undefined;
@@ -7000,6 +7065,1061 @@ export namespace Prisma {
 
 
   /**
+   * Model Disco
+   */
+
+  export type AggregateDisco = {
+    _count: DiscoCountAggregateOutputType | null
+    _avg: DiscoAvgAggregateOutputType | null
+    _sum: DiscoSumAggregateOutputType | null
+    _min: DiscoMinAggregateOutputType | null
+    _max: DiscoMaxAggregateOutputType | null
+  }
+
+  export type DiscoAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type DiscoSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type DiscoMinAggregateOutputType = {
+    id: number | null
+    name: string | null
+    slug: string | null
+    description: string | null
+    imageUrl: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DiscoMaxAggregateOutputType = {
+    id: number | null
+    name: string | null
+    slug: string | null
+    description: string | null
+    imageUrl: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DiscoCountAggregateOutputType = {
+    id: number
+    name: number
+    slug: number
+    description: number
+    imageUrl: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type DiscoAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type DiscoSumAggregateInputType = {
+    id?: true
+  }
+
+  export type DiscoMinAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+    description?: true
+    imageUrl?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DiscoMaxAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+    description?: true
+    imageUrl?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DiscoCountAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+    description?: true
+    imageUrl?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type DiscoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Disco to aggregate.
+     */
+    where?: DiscoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Discos to fetch.
+     */
+    orderBy?: DiscoOrderByWithRelationInput | DiscoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DiscoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Discos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Discos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Discos
+    **/
+    _count?: true | DiscoCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: DiscoAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: DiscoSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DiscoMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DiscoMaxAggregateInputType
+  }
+
+  export type GetDiscoAggregateType<T extends DiscoAggregateArgs> = {
+        [P in keyof T & keyof AggregateDisco]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDisco[P]>
+      : GetScalarType<T[P], AggregateDisco[P]>
+  }
+
+
+
+
+  export type DiscoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DiscoWhereInput
+    orderBy?: DiscoOrderByWithAggregationInput | DiscoOrderByWithAggregationInput[]
+    by: DiscoScalarFieldEnum[] | DiscoScalarFieldEnum
+    having?: DiscoScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DiscoCountAggregateInputType | true
+    _avg?: DiscoAvgAggregateInputType
+    _sum?: DiscoSumAggregateInputType
+    _min?: DiscoMinAggregateInputType
+    _max?: DiscoMaxAggregateInputType
+  }
+
+  export type DiscoGroupByOutputType = {
+    id: number
+    name: string
+    slug: string
+    description: string | null
+    imageUrl: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: DiscoCountAggregateOutputType | null
+    _avg: DiscoAvgAggregateOutputType | null
+    _sum: DiscoSumAggregateOutputType | null
+    _min: DiscoMinAggregateOutputType | null
+    _max: DiscoMaxAggregateOutputType | null
+  }
+
+  type GetDiscoGroupByPayload<T extends DiscoGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DiscoGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DiscoGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DiscoGroupByOutputType[P]>
+            : GetScalarType<T[P], DiscoGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DiscoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    description?: boolean
+    imageUrl?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["disco"]>
+
+  export type DiscoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    description?: boolean
+    imageUrl?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["disco"]>
+
+  export type DiscoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    description?: boolean
+    imageUrl?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["disco"]>
+
+  export type DiscoSelectScalar = {
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    description?: boolean
+    imageUrl?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type DiscoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "imageUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["disco"]>
+
+  export type $DiscoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Disco"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      name: string
+      slug: string
+      description: string | null
+      imageUrl: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["disco"]>
+    composites: {}
+  }
+
+  type DiscoGetPayload<S extends boolean | null | undefined | DiscoDefaultArgs> = $Result.GetResult<Prisma.$DiscoPayload, S>
+
+  type DiscoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DiscoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DiscoCountAggregateInputType | true
+    }
+
+  export interface DiscoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Disco'], meta: { name: 'Disco' } }
+    /**
+     * Find zero or one Disco that matches the filter.
+     * @param {DiscoFindUniqueArgs} args - Arguments to find a Disco
+     * @example
+     * // Get one Disco
+     * const disco = await prisma.disco.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DiscoFindUniqueArgs>(args: SelectSubset<T, DiscoFindUniqueArgs<ExtArgs>>): Prisma__DiscoClient<$Result.GetResult<Prisma.$DiscoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Disco that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DiscoFindUniqueOrThrowArgs} args - Arguments to find a Disco
+     * @example
+     * // Get one Disco
+     * const disco = await prisma.disco.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DiscoFindUniqueOrThrowArgs>(args: SelectSubset<T, DiscoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DiscoClient<$Result.GetResult<Prisma.$DiscoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Disco that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DiscoFindFirstArgs} args - Arguments to find a Disco
+     * @example
+     * // Get one Disco
+     * const disco = await prisma.disco.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DiscoFindFirstArgs>(args?: SelectSubset<T, DiscoFindFirstArgs<ExtArgs>>): Prisma__DiscoClient<$Result.GetResult<Prisma.$DiscoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Disco that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DiscoFindFirstOrThrowArgs} args - Arguments to find a Disco
+     * @example
+     * // Get one Disco
+     * const disco = await prisma.disco.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DiscoFindFirstOrThrowArgs>(args?: SelectSubset<T, DiscoFindFirstOrThrowArgs<ExtArgs>>): Prisma__DiscoClient<$Result.GetResult<Prisma.$DiscoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Discos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DiscoFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Discos
+     * const discos = await prisma.disco.findMany()
+     * 
+     * // Get first 10 Discos
+     * const discos = await prisma.disco.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const discoWithIdOnly = await prisma.disco.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DiscoFindManyArgs>(args?: SelectSubset<T, DiscoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Disco.
+     * @param {DiscoCreateArgs} args - Arguments to create a Disco.
+     * @example
+     * // Create one Disco
+     * const Disco = await prisma.disco.create({
+     *   data: {
+     *     // ... data to create a Disco
+     *   }
+     * })
+     * 
+     */
+    create<T extends DiscoCreateArgs>(args: SelectSubset<T, DiscoCreateArgs<ExtArgs>>): Prisma__DiscoClient<$Result.GetResult<Prisma.$DiscoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Discos.
+     * @param {DiscoCreateManyArgs} args - Arguments to create many Discos.
+     * @example
+     * // Create many Discos
+     * const disco = await prisma.disco.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DiscoCreateManyArgs>(args?: SelectSubset<T, DiscoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Discos and returns the data saved in the database.
+     * @param {DiscoCreateManyAndReturnArgs} args - Arguments to create many Discos.
+     * @example
+     * // Create many Discos
+     * const disco = await prisma.disco.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Discos and only return the `id`
+     * const discoWithIdOnly = await prisma.disco.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DiscoCreateManyAndReturnArgs>(args?: SelectSubset<T, DiscoCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscoPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Disco.
+     * @param {DiscoDeleteArgs} args - Arguments to delete one Disco.
+     * @example
+     * // Delete one Disco
+     * const Disco = await prisma.disco.delete({
+     *   where: {
+     *     // ... filter to delete one Disco
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DiscoDeleteArgs>(args: SelectSubset<T, DiscoDeleteArgs<ExtArgs>>): Prisma__DiscoClient<$Result.GetResult<Prisma.$DiscoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Disco.
+     * @param {DiscoUpdateArgs} args - Arguments to update one Disco.
+     * @example
+     * // Update one Disco
+     * const disco = await prisma.disco.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DiscoUpdateArgs>(args: SelectSubset<T, DiscoUpdateArgs<ExtArgs>>): Prisma__DiscoClient<$Result.GetResult<Prisma.$DiscoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Discos.
+     * @param {DiscoDeleteManyArgs} args - Arguments to filter Discos to delete.
+     * @example
+     * // Delete a few Discos
+     * const { count } = await prisma.disco.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DiscoDeleteManyArgs>(args?: SelectSubset<T, DiscoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Discos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DiscoUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Discos
+     * const disco = await prisma.disco.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DiscoUpdateManyArgs>(args: SelectSubset<T, DiscoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Discos and returns the data updated in the database.
+     * @param {DiscoUpdateManyAndReturnArgs} args - Arguments to update many Discos.
+     * @example
+     * // Update many Discos
+     * const disco = await prisma.disco.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Discos and only return the `id`
+     * const discoWithIdOnly = await prisma.disco.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DiscoUpdateManyAndReturnArgs>(args: SelectSubset<T, DiscoUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscoPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Disco.
+     * @param {DiscoUpsertArgs} args - Arguments to update or create a Disco.
+     * @example
+     * // Update or create a Disco
+     * const disco = await prisma.disco.upsert({
+     *   create: {
+     *     // ... data to create a Disco
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Disco we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DiscoUpsertArgs>(args: SelectSubset<T, DiscoUpsertArgs<ExtArgs>>): Prisma__DiscoClient<$Result.GetResult<Prisma.$DiscoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Discos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DiscoCountArgs} args - Arguments to filter Discos to count.
+     * @example
+     * // Count the number of Discos
+     * const count = await prisma.disco.count({
+     *   where: {
+     *     // ... the filter for the Discos we want to count
+     *   }
+     * })
+    **/
+    count<T extends DiscoCountArgs>(
+      args?: Subset<T, DiscoCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DiscoCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Disco.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DiscoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DiscoAggregateArgs>(args: Subset<T, DiscoAggregateArgs>): Prisma.PrismaPromise<GetDiscoAggregateType<T>>
+
+    /**
+     * Group by Disco.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DiscoGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DiscoGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DiscoGroupByArgs['orderBy'] }
+        : { orderBy?: DiscoGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DiscoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDiscoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Disco model
+   */
+  readonly fields: DiscoFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Disco.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DiscoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Disco model
+   */
+  interface DiscoFieldRefs {
+    readonly id: FieldRef<"Disco", 'Int'>
+    readonly name: FieldRef<"Disco", 'String'>
+    readonly slug: FieldRef<"Disco", 'String'>
+    readonly description: FieldRef<"Disco", 'String'>
+    readonly imageUrl: FieldRef<"Disco", 'String'>
+    readonly createdAt: FieldRef<"Disco", 'DateTime'>
+    readonly updatedAt: FieldRef<"Disco", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Disco findUnique
+   */
+  export type DiscoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Disco
+     */
+    select?: DiscoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Disco
+     */
+    omit?: DiscoOmit<ExtArgs> | null
+    /**
+     * Filter, which Disco to fetch.
+     */
+    where: DiscoWhereUniqueInput
+  }
+
+  /**
+   * Disco findUniqueOrThrow
+   */
+  export type DiscoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Disco
+     */
+    select?: DiscoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Disco
+     */
+    omit?: DiscoOmit<ExtArgs> | null
+    /**
+     * Filter, which Disco to fetch.
+     */
+    where: DiscoWhereUniqueInput
+  }
+
+  /**
+   * Disco findFirst
+   */
+  export type DiscoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Disco
+     */
+    select?: DiscoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Disco
+     */
+    omit?: DiscoOmit<ExtArgs> | null
+    /**
+     * Filter, which Disco to fetch.
+     */
+    where?: DiscoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Discos to fetch.
+     */
+    orderBy?: DiscoOrderByWithRelationInput | DiscoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Discos.
+     */
+    cursor?: DiscoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Discos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Discos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Discos.
+     */
+    distinct?: DiscoScalarFieldEnum | DiscoScalarFieldEnum[]
+  }
+
+  /**
+   * Disco findFirstOrThrow
+   */
+  export type DiscoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Disco
+     */
+    select?: DiscoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Disco
+     */
+    omit?: DiscoOmit<ExtArgs> | null
+    /**
+     * Filter, which Disco to fetch.
+     */
+    where?: DiscoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Discos to fetch.
+     */
+    orderBy?: DiscoOrderByWithRelationInput | DiscoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Discos.
+     */
+    cursor?: DiscoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Discos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Discos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Discos.
+     */
+    distinct?: DiscoScalarFieldEnum | DiscoScalarFieldEnum[]
+  }
+
+  /**
+   * Disco findMany
+   */
+  export type DiscoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Disco
+     */
+    select?: DiscoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Disco
+     */
+    omit?: DiscoOmit<ExtArgs> | null
+    /**
+     * Filter, which Discos to fetch.
+     */
+    where?: DiscoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Discos to fetch.
+     */
+    orderBy?: DiscoOrderByWithRelationInput | DiscoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Discos.
+     */
+    cursor?: DiscoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Discos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Discos.
+     */
+    skip?: number
+    distinct?: DiscoScalarFieldEnum | DiscoScalarFieldEnum[]
+  }
+
+  /**
+   * Disco create
+   */
+  export type DiscoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Disco
+     */
+    select?: DiscoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Disco
+     */
+    omit?: DiscoOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Disco.
+     */
+    data: XOR<DiscoCreateInput, DiscoUncheckedCreateInput>
+  }
+
+  /**
+   * Disco createMany
+   */
+  export type DiscoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Discos.
+     */
+    data: DiscoCreateManyInput | DiscoCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Disco createManyAndReturn
+   */
+  export type DiscoCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Disco
+     */
+    select?: DiscoSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Disco
+     */
+    omit?: DiscoOmit<ExtArgs> | null
+    /**
+     * The data used to create many Discos.
+     */
+    data: DiscoCreateManyInput | DiscoCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Disco update
+   */
+  export type DiscoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Disco
+     */
+    select?: DiscoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Disco
+     */
+    omit?: DiscoOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Disco.
+     */
+    data: XOR<DiscoUpdateInput, DiscoUncheckedUpdateInput>
+    /**
+     * Choose, which Disco to update.
+     */
+    where: DiscoWhereUniqueInput
+  }
+
+  /**
+   * Disco updateMany
+   */
+  export type DiscoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Discos.
+     */
+    data: XOR<DiscoUpdateManyMutationInput, DiscoUncheckedUpdateManyInput>
+    /**
+     * Filter which Discos to update
+     */
+    where?: DiscoWhereInput
+    /**
+     * Limit how many Discos to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Disco updateManyAndReturn
+   */
+  export type DiscoUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Disco
+     */
+    select?: DiscoSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Disco
+     */
+    omit?: DiscoOmit<ExtArgs> | null
+    /**
+     * The data used to update Discos.
+     */
+    data: XOR<DiscoUpdateManyMutationInput, DiscoUncheckedUpdateManyInput>
+    /**
+     * Filter which Discos to update
+     */
+    where?: DiscoWhereInput
+    /**
+     * Limit how many Discos to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Disco upsert
+   */
+  export type DiscoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Disco
+     */
+    select?: DiscoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Disco
+     */
+    omit?: DiscoOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Disco to update in case it exists.
+     */
+    where: DiscoWhereUniqueInput
+    /**
+     * In case the Disco found by the `where` argument doesn't exist, create a new Disco with this data.
+     */
+    create: XOR<DiscoCreateInput, DiscoUncheckedCreateInput>
+    /**
+     * In case the Disco was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DiscoUpdateInput, DiscoUncheckedUpdateInput>
+  }
+
+  /**
+   * Disco delete
+   */
+  export type DiscoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Disco
+     */
+    select?: DiscoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Disco
+     */
+    omit?: DiscoOmit<ExtArgs> | null
+    /**
+     * Filter which Disco to delete.
+     */
+    where: DiscoWhereUniqueInput
+  }
+
+  /**
+   * Disco deleteMany
+   */
+  export type DiscoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Discos to delete
+     */
+    where?: DiscoWhereInput
+    /**
+     * Limit how many Discos to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Disco without action
+   */
+  export type DiscoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Disco
+     */
+    select?: DiscoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Disco
+     */
+    omit?: DiscoOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -7085,6 +8205,19 @@ export namespace Prisma {
   };
 
   export type ContactUsScalarFieldEnum = (typeof ContactUsScalarFieldEnum)[keyof typeof ContactUsScalarFieldEnum]
+
+
+  export const DiscoScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    slug: 'slug',
+    description: 'description',
+    imageUrl: 'imageUrl',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type DiscoScalarFieldEnum = (typeof DiscoScalarFieldEnum)[keyof typeof DiscoScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -7601,6 +8734,70 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"ContactUs"> | Date | string
   }
 
+  export type DiscoWhereInput = {
+    AND?: DiscoWhereInput | DiscoWhereInput[]
+    OR?: DiscoWhereInput[]
+    NOT?: DiscoWhereInput | DiscoWhereInput[]
+    id?: IntFilter<"Disco"> | number
+    name?: StringFilter<"Disco"> | string
+    slug?: StringFilter<"Disco"> | string
+    description?: StringNullableFilter<"Disco"> | string | null
+    imageUrl?: StringNullableFilter<"Disco"> | string | null
+    createdAt?: DateTimeFilter<"Disco"> | Date | string
+    updatedAt?: DateTimeFilter<"Disco"> | Date | string
+  }
+
+  export type DiscoOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrderInput | SortOrder
+    imageUrl?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DiscoWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    name?: string
+    slug?: string
+    AND?: DiscoWhereInput | DiscoWhereInput[]
+    OR?: DiscoWhereInput[]
+    NOT?: DiscoWhereInput | DiscoWhereInput[]
+    description?: StringNullableFilter<"Disco"> | string | null
+    imageUrl?: StringNullableFilter<"Disco"> | string | null
+    createdAt?: DateTimeFilter<"Disco"> | Date | string
+    updatedAt?: DateTimeFilter<"Disco"> | Date | string
+  }, "id" | "name" | "slug">
+
+  export type DiscoOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrderInput | SortOrder
+    imageUrl?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: DiscoCountOrderByAggregateInput
+    _avg?: DiscoAvgOrderByAggregateInput
+    _max?: DiscoMaxOrderByAggregateInput
+    _min?: DiscoMinOrderByAggregateInput
+    _sum?: DiscoSumOrderByAggregateInput
+  }
+
+  export type DiscoScalarWhereWithAggregatesInput = {
+    AND?: DiscoScalarWhereWithAggregatesInput | DiscoScalarWhereWithAggregatesInput[]
+    OR?: DiscoScalarWhereWithAggregatesInput[]
+    NOT?: DiscoScalarWhereWithAggregatesInput | DiscoScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Disco"> | number
+    name?: StringWithAggregatesFilter<"Disco"> | string
+    slug?: StringWithAggregatesFilter<"Disco"> | string
+    description?: StringNullableWithAggregatesFilter<"Disco"> | string | null
+    imageUrl?: StringNullableWithAggregatesFilter<"Disco"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Disco"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Disco"> | Date | string
+  }
+
   export type UserCreateInput = {
     name: string
     email: string
@@ -8004,6 +9201,73 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     message?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DiscoCreateInput = {
+    name: string
+    slug: string
+    description?: string | null
+    imageUrl?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DiscoUncheckedCreateInput = {
+    id?: number
+    name: string
+    slug: string
+    description?: string | null
+    imageUrl?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DiscoUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DiscoUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DiscoCreateManyInput = {
+    id?: number
+    name: string
+    slug: string
+    description?: string | null
+    imageUrl?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DiscoUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DiscoUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -8464,6 +9728,44 @@ export namespace Prisma {
   }
 
   export type ContactUsSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type DiscoCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrder
+    imageUrl?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DiscoAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type DiscoMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrder
+    imageUrl?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DiscoMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrder
+    imageUrl?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DiscoSumOrderByAggregateInput = {
     id?: SortOrder
   }
 
