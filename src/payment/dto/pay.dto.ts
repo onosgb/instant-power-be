@@ -23,4 +23,5 @@ export class PayDto extends CheckMeter {
   @IsString()
   name: string;
   receiptNo?: string;
+  pspReference?: string;
 }

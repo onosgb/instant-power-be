@@ -164,6 +164,7 @@ exports.Prisma.TransactionScalarFieldEnum = {
   status: 'status',
   method: 'method',
   receipt: 'receipt',
+  reference: 'reference',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

@@ -4771,6 +4771,7 @@ export namespace Prisma {
     status: $Enums.PaymentStatus | null
     method: string | null
     receipt: string | null
+    reference: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -4790,6 +4791,7 @@ export namespace Prisma {
     status: $Enums.PaymentStatus | null
     method: string | null
     receipt: string | null
+    reference: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -4809,6 +4811,7 @@ export namespace Prisma {
     status: number
     method: number
     receipt: number
+    reference: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -4844,6 +4847,7 @@ export namespace Prisma {
     status?: true
     method?: true
     receipt?: true
+    reference?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -4863,6 +4867,7 @@ export namespace Prisma {
     status?: true
     method?: true
     receipt?: true
+    reference?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -4882,6 +4887,7 @@ export namespace Prisma {
     status?: true
     method?: true
     receipt?: true
+    reference?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -4988,6 +4994,7 @@ export namespace Prisma {
     status: $Enums.PaymentStatus
     method: string
     receipt: string
+    reference: string
     createdAt: Date
     updatedAt: Date
     _count: TransactionCountAggregateOutputType | null
@@ -5026,6 +5033,7 @@ export namespace Prisma {
     status?: boolean
     method?: boolean
     receipt?: boolean
+    reference?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | Transaction$userArgs<ExtArgs>
@@ -5046,6 +5054,7 @@ export namespace Prisma {
     status?: boolean
     method?: boolean
     receipt?: boolean
+    reference?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | Transaction$userArgs<ExtArgs>
@@ -5066,6 +5075,7 @@ export namespace Prisma {
     status?: boolean
     method?: boolean
     receipt?: boolean
+    reference?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | Transaction$userArgs<ExtArgs>
@@ -5086,11 +5096,12 @@ export namespace Prisma {
     status?: boolean
     method?: boolean
     receipt?: boolean
+    reference?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type TransactionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "email" | "name" | "meterName" | "ref" | "amount" | "tax" | "disco" | "dept" | "token" | "status" | "method" | "receipt" | "createdAt" | "updatedAt", ExtArgs["result"]["transaction"]>
+  export type TransactionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "email" | "name" | "meterName" | "ref" | "amount" | "tax" | "disco" | "dept" | "token" | "status" | "method" | "receipt" | "reference" | "createdAt" | "updatedAt", ExtArgs["result"]["transaction"]>
   export type TransactionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Transaction$userArgs<ExtArgs>
   }
@@ -5121,6 +5132,7 @@ export namespace Prisma {
       status: $Enums.PaymentStatus
       method: string
       receipt: string
+      reference: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["transaction"]>
@@ -5561,6 +5573,7 @@ export namespace Prisma {
     readonly status: FieldRef<"Transaction", 'PaymentStatus'>
     readonly method: FieldRef<"Transaction", 'String'>
     readonly receipt: FieldRef<"Transaction", 'String'>
+    readonly reference: FieldRef<"Transaction", 'String'>
     readonly createdAt: FieldRef<"Transaction", 'DateTime'>
     readonly updatedAt: FieldRef<"Transaction", 'DateTime'>
   }
@@ -8186,6 +8199,7 @@ export namespace Prisma {
     status: 'status',
     method: 'method',
     receipt: 'receipt',
+    reference: 'reference',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -8571,6 +8585,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFilter<"Transaction"> | $Enums.PaymentStatus
     method?: StringFilter<"Transaction"> | string
     receipt?: StringFilter<"Transaction"> | string
+    reference?: StringFilter<"Transaction"> | string
     createdAt?: DateTimeFilter<"Transaction"> | Date | string
     updatedAt?: DateTimeFilter<"Transaction"> | Date | string
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -8591,6 +8606,7 @@ export namespace Prisma {
     status?: SortOrder
     method?: SortOrder
     receipt?: SortOrder
+    reference?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -8614,6 +8630,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFilter<"Transaction"> | $Enums.PaymentStatus
     method?: StringFilter<"Transaction"> | string
     receipt?: StringFilter<"Transaction"> | string
+    reference?: StringFilter<"Transaction"> | string
     createdAt?: DateTimeFilter<"Transaction"> | Date | string
     updatedAt?: DateTimeFilter<"Transaction"> | Date | string
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -8634,6 +8651,7 @@ export namespace Prisma {
     status?: SortOrder
     method?: SortOrder
     receipt?: SortOrder
+    reference?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: TransactionCountOrderByAggregateInput
@@ -8661,6 +8679,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusWithAggregatesFilter<"Transaction"> | $Enums.PaymentStatus
     method?: StringWithAggregatesFilter<"Transaction"> | string
     receipt?: StringWithAggregatesFilter<"Transaction"> | string
+    reference?: StringWithAggregatesFilter<"Transaction"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Transaction"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Transaction"> | Date | string
   }
@@ -9015,6 +9034,7 @@ export namespace Prisma {
     status: $Enums.PaymentStatus
     method: string
     receipt: string
+    reference: string
     createdAt?: Date | string
     updatedAt?: Date | string
     user?: UserCreateNestedOneWithoutTransactionsInput
@@ -9035,6 +9055,7 @@ export namespace Prisma {
     status: $Enums.PaymentStatus
     method: string
     receipt: string
+    reference: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9052,6 +9073,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     method?: StringFieldUpdateOperationsInput | string
     receipt?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutTransactionsNestedInput
@@ -9072,6 +9094,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     method?: StringFieldUpdateOperationsInput | string
     receipt?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9091,6 +9114,7 @@ export namespace Prisma {
     status: $Enums.PaymentStatus
     method: string
     receipt: string
+    reference: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9108,6 +9132,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     method?: StringFieldUpdateOperationsInput | string
     receipt?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9127,6 +9152,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     method?: StringFieldUpdateOperationsInput | string
     receipt?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9608,6 +9634,7 @@ export namespace Prisma {
     status?: SortOrder
     method?: SortOrder
     receipt?: SortOrder
+    reference?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -9634,6 +9661,7 @@ export namespace Prisma {
     status?: SortOrder
     method?: SortOrder
     receipt?: SortOrder
+    reference?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -9653,6 +9681,7 @@ export namespace Prisma {
     status?: SortOrder
     method?: SortOrder
     receipt?: SortOrder
+    reference?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -10174,6 +10203,7 @@ export namespace Prisma {
     status: $Enums.PaymentStatus
     method: string
     receipt: string
+    reference: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -10192,6 +10222,7 @@ export namespace Prisma {
     status: $Enums.PaymentStatus
     method: string
     receipt: string
+    reference: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -10261,6 +10292,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFilter<"Transaction"> | $Enums.PaymentStatus
     method?: StringFilter<"Transaction"> | string
     receipt?: StringFilter<"Transaction"> | string
+    reference?: StringFilter<"Transaction"> | string
     createdAt?: DateTimeFilter<"Transaction"> | Date | string
     updatedAt?: DateTimeFilter<"Transaction"> | Date | string
   }
@@ -10443,6 +10475,7 @@ export namespace Prisma {
     status: $Enums.PaymentStatus
     method: string
     receipt: string
+    reference: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -10460,6 +10493,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     method?: StringFieldUpdateOperationsInput | string
     receipt?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -10478,6 +10512,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     method?: StringFieldUpdateOperationsInput | string
     receipt?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -10496,6 +10531,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     method?: StringFieldUpdateOperationsInput | string
     receipt?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

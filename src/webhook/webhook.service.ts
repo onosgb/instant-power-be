@@ -79,6 +79,7 @@ export class WebhookService {
         status: PaymentStatus.Success,
         method: 'Online',
         receipt: paymentData.receiptNo,
+        reference: paymentData.reference,
       };
       const res = await this.prisma.transaction.create({
         data: create,
