@@ -53,6 +53,7 @@ export class WebhookService {
         amount: pay.amount,
         email: pay.email,
         name: pay.name,
+        receiptNo: pay.receiptNo,
       };
       const vendRequest = await this.http.axiosRef.post(
         `${process.env.BUYPOWER_URL}/vend`,
@@ -77,7 +78,7 @@ export class WebhookService {
         token: paymentData.token,
         status: PaymentStatus.Success,
         method: 'Online',
-        receipt: paymentData.receiptNo.toString(),
+        receipt: paymentData.receiptNo,
       };
       const res = await this.prisma.transaction.create({
         data: create,

@@ -13,8 +13,17 @@ export class CheckMeter {
   vendType: string;
   @ApiProperty({ description: 'Vertical', type: 'string' })
   @IsString()
-  vertical: string;
+  vertical?: string;
   @ApiProperty({ description: 'Order Id', type: 'boolean', required: false })
   @Optional()
   orderId: boolean;
+
+  constructor() {
+    if (!this.vertical) {
+      this.vertical = 'ELECTRICITY';
+    }
+    if (!this.orderId) {
+      this.orderId = false;
+    }
+  }
 }

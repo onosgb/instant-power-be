@@ -22,4 +22,5 @@ export class PayDto extends CheckMeter {
   @ApiProperty({ description: 'Name', type: 'string' })
   @IsString()
   name: string;
+  receiptNo?: string;
 }

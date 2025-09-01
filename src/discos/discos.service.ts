@@ -18,7 +18,7 @@ export class DiscosService {
   }
 
   findAllDiscos() {
-    return this.prismaService.disco.findMany();
+    return {};
   }
 
   findDiscoById(id: number) {

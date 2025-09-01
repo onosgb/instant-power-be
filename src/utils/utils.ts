@@ -27,3 +27,13 @@ export function logger(title: string, log: any) {
     console.log(`${title}: `, log);
   }
 }
+
+export function generateReceiptNo(): string {
+  const now = new Date();
+  const datePart = now
+    .toISOString()
+    .replace(/[-T:.Z]/g, '')
+    .slice(0, 14); // e.g. 20250831123045
+  const randomPart = Math.random().toString(36).substring(2, 8).toUpperCase();
+  return `RCPT-${datePart}-${randomPart}`;
+}

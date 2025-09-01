@@ -5,6 +5,7 @@ import { PrismaService } from 'src/shared/services/prisma.service';
 import { CheckMeter } from './dto/check-meter.interface';
 import { Transaction } from 'prisma';
 import { PayDto } from './dto/pay.dto';
+import { generateReceiptNo } from 'src/utils/utils';
 
 @Injectable()
 export class PaymentService {
@@ -56,6 +57,7 @@ export class PaymentService {
           amount: pay.amount,
           email: pay.email,
           name: pay.name,
+          receiptNo: generateReceiptNo(),
         },
         callback_url: process.env.PAYSTACK_CALLBACK_URL,
       });
