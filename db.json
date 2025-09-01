@@ -1,0 +1,391 @@
+{
+  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NjA1NTYzMywic3NvTG9naW4iOmZhbHNlLCJqdGkiOiI2OGEwNjljMzRkNWZmNDAwMjMyMWIwY2EiLCJpYXQiOjE3NTUzNDMyOTksIm5iZiI6MTc1NTM0MzI5OSwiZXhwIjoxNzU1NDI5Njk5fQ.UXXQVo1pC12tM9vwmTi8AZ0hR9rfL9F2vbMJ4naRN_s",
+  "user": {
+    "integrations": [
+      {
+        "business_name": "InstantPowerNG",
+        "business_type": "registered",
+        "short_name": null,
+        "id": 1182860,
+        "logged_in_user_role": {
+          "id": 33,
+          "name": "developer-support",
+          "description": "This role grants users the permissions necessary for providing technical support"
+        },
+        "country_code": "NG",
+        "country": 1,
+        "sso_enabled": false,
+        "mfa": {
+          "is_required": false,
+          "enforcement_deadline": null
+        }
+      }
+    ],
+    "email": "onosgb@gmail.com",
+    "first_name": "Godbless",
+    "last_name": "Onoriode",
+    "phone": "8143651142",
+    "area_code": null,
+    "calling_code": "+234",
+    "registration_complete": true,
+    "last_login": "2025-08-16T11:21:19.000Z",
+    "wt_access": "none",
+    "is_developer": true,
+    "job_title": "Full Stack Developer",
+    "truecaller_verified": false,
+    "drip_tag": null,
+    "created_from": null,
+    "mfa_enabled": true,
+    "email_verified": true,
+    "id": 6055633,
+    "invited_by": 5710635,
+    "current_integration": 1182860,
+    "passwordLastResetAt": "2025-08-11T09:36:50.000Z",
+    "createdAt": "2025-08-08T15:35:30.000Z",
+    "updatedAt": "2025-08-16T11:21:19.000Z",
+    "ssoLogin": false,
+    "dashboard_preferences": {
+      "pagination": {},
+      "timezone": "UTC"
+    },
+    "display_state": "test",
+    "role": {
+      "value": 1711459075111811,
+      "name": "developer-support",
+      "description": "This role grants users the permissions necessary for providing technical support",
+      "integration": 0,
+      "service": "dashboard",
+      "id": 33,
+      "organization": 1,
+      "createdAt": "2018-05-10T23:40:26.000Z",
+      "updatedAt": "2018-05-10T23:40:26.000Z",
+      "is_custom": false
+    },
+    "permissions": [
+      "api-key-*",
+      "api-key-view",
+      "settings-view",
+      "transaction-view",
+      "transaction-export",
+      "customer-view",
+      "customer-add",
+      "customer-*",
+      "page-view",
+      "page-*",
+      "plan-view",
+      "paymentrequest-view",
+      "paymentrequest-*",
+      "subaccount-*",
+      "subaccount-view",
+      "product-view",
+      "applepay-*",
+      "corporate-cards-view",
+      "issuing-view"
+    ],
+    "show_mfa_feature": true
+  },
+  "selected_integration": {
+    "business_name": "InstantPowerNG",
+    "description": "Electricity payment services",
+    "rc_number": null,
+    "phone": "7063990748",
+    "email": null,
+    "address": null,
+    "product_name": null,
+    "registration_document_number": null,
+    "registration_document_type": null,
+    "primary_contact_name": null,
+    "primary_contact_email": null,
+    "primary_contact_phone": null,
+    "support_email": null,
+    "chargeback_email": null,
+    "logo_path": "https://public-files-paystack-prod.s3.eu-west-1.amazonaws.com/integration-logos/paystack.jpg",
+    "integration_agreement_path": null,
+    "settlement_bank": null,
+    "account_number": null,
+    "registration_document_path": null,
+    "risk_level": "high",
+    "isw_category": 3,
+    "mcc_category": "4900",
+    "flat_rate": 100,
+    "charge_percentage": 1.5,
+    "international_flat_rate": 100,
+    "international_charge_percentage": 3.9,
+    "flat_threshhold": 2500,
+    "transfer_charge": 5000,
+    "settlement_schedule": "T1",
+    "test_redirect_url": "",
+    "test_webhook_endpoint": "https://witty-wings-show.loca.lt/webhook/paystack",
+    "live_redirect_url": null,
+    "live_webhook_endpoint": null,
+    "test_integration_url": null,
+    "test_integration_instruction": null,
+    "email_notification": "instant",
+    "pwc_id": 102501,
+    "is_live": true,
+    "go_live_requested": true,
+    "go_live_requested_at": "2024-05-17T16:01:38.000Z",
+    "live_keys_requested": false,
+    "live_keys_requested_at": null,
+    "reviewed_at": null,
+    "setup_complete": false,
+    "receipts": true,
+    "display_state": "live",
+    "active": true,
+    "short_name": null,
+    "international_toggle_disabled": true,
+    "allow_international_cards": false,
+    "active_channels": [
+      "card",
+      "bank",
+      "qr",
+      "ussd",
+      "bank_transfer"
+    ],
+    "allowed_currencies": [
+      "NGN"
+    ],
+    "allow_whitelist": false,
+    "charge_from_dashboard": false,
+    "can_transfer": true,
+    "transfer_using_otp": true,
+    "payouts_on_hold": false,
+    "go_live_date": "2024-05-22T07:46:10.000Z",
+    "payments_session_timeout": 0,
+    "metadata": null,
+    "transfer_notification": "instant",
+    "business_category": null,
+    "business_size": null,
+    "business_type": "registered",
+    "website_url": "https://instantpower.com.ng/",
+    "social_urls": {
+      "facebook": "https://www.facebook.com/profile.php?id=61559662632603",
+      "instagram": "",
+      "twitter": "https://x.com/NgInstant52531"
+    },
+    "is_under_investigation": false,
+    "is_disabled": false,
+    "disable_reason": null,
+    "disable_at": null,
+    "identity_evidence_path": null,
+    "director_identity_evidence_path": null,
+    "bvn": null,
+    "bvn_date_of_birth": null,
+    "go_live_status": "confirmed",
+    "registration_packet_path": null,
+    "default_currency": "NGN",
+    "transfer_notification_to_recipient": "instant",
+    "send_transfer_email_otp": true,
+    "fast_checkout_enabled": false,
+    "id": 1182860,
+    "primary_user": 5710635,
+    "organization": 1,
+    "createdAt": "2024-04-08T19:02:46.000Z",
+    "updatedAt": "2025-08-16T11:17:32.000Z",
+    "transfer_fees": [
+      {
+        "fee": 5000,
+        "thresholds": [
+          {
+            "max": 500000,
+            "fee": 1000
+          },
+          {
+            "max": 5000000,
+            "fee": 2500
+          }
+        ],
+        "currency": "NGN"
+      }
+    ],
+    "consent_received": false,
+    "attributes": {
+      "id": 1082435,
+      "integration": 1182860,
+      "country": {
+        "id": 1,
+        "active_for_dashboard_onboarding": true,
+        "name": "Nigeria",
+        "iso_code": "NG",
+        "default_currency_code": "NGN",
+        "integration_defaults": {},
+        "calling_code": "+234",
+        "pilot_mode": false,
+        "relationships": {
+          "currency": {
+            "type": "currency",
+            "data": [
+              "NGN"
+            ],
+            "supported_currencies": {
+              "NGN": {
+                "bank": {
+                  "bank_type": "nuban",
+                  "branch_code": false,
+                  "branch_code_type": "text",
+                  "account_name": false,
+                  "account_verification_required": true,
+                  "account_number_label": "accountNumber",
+                  "account_number_pattern": {
+                    "exact_match": true,
+                    "pattern": "[0-9]{10}"
+                  },
+                  "documents": [],
+                  "show_account_number_tooltip": false
+                }
+              },
+              "USD": {
+                "bank": {
+                  "bank_type": "nuban",
+                  "required_fields": [
+                    "bank",
+                    "account_number"
+                  ],
+                  "branch_code": false,
+                  "branch_code_type": "text",
+                  "account_name": false,
+                  "account_verification_required": true,
+                  "account_number_label": "accountNumber",
+                  "account_number_pattern": {
+                    "exact_match": true,
+                    "pattern": ""
+                  },
+                  "documents": [],
+                  "notices": [
+                    "USD can currently only be settled into Zenith Bank USD accounts.",
+                    "You'll receive USD settlements 7 working days after payment has been made.",
+                    "In case of fraudulent transactions involving international payments, Paystack will reverse the transaction and deduct the amount from your balance."
+                  ]
+                }
+              }
+            }
+          },
+          "integration_feature": {
+            "type": "integration_feature",
+            "data": []
+          },
+          "integration_type": {
+            "type": "integration_type",
+            "data": [
+              "ITYPE_001",
+              "ITYPE_002",
+              "ITYPE_003"
+            ]
+          },
+          "payment_method": {
+            "type": "payment_method",
+            "data": [
+              "PAYM_001",
+              "PAYM_002",
+              "PAYM_003",
+              "PAYM_004"
+            ]
+          }
+        }
+      },
+      "industry": null,
+      "integration_type": {
+        "id": 2,
+        "code": "ITYPE_002",
+        "label": "registered",
+        "display_name": "Registered Business",
+        "description": "Choose this if your business is registered with an RC Number, BN Number, NEPZA Number etc",
+        "is_active": true,
+        "relationships": {
+          "kyc_requirement": {
+            "type": "kyc_requirement",
+            "data": [
+              "KYCREQ_001",
+              "KYCREQ_014",
+              "KYCREQ_025"
+            ]
+          }
+        },
+        "upgradable_to": []
+      },
+      "legal_business_name": "Advance Systems Infrastructure LImited",
+      "duplicated_from_integration": null,
+      "compliance_status": "PENDING",
+      "compliance_due_date": "2024-05-08T00:00:00.000Z",
+      "incorporation_date": null,
+      "country_code": "NG",
+      "industry_code": "UTILITIES",
+      "registration_number": null,
+      "registration_type": "NG-RC-PRI",
+      "ownership_type": "NG-RC-LTD-2020",
+      "industry_categories": "BILL-PAYMENTS",
+      "area_code": "0",
+      "calling_code": "+234",
+      "form_three_evidence_path": null,
+      "settlement_account_type": "bank_account",
+      "international_requested": false,
+      "email_rules": null,
+      "compliance_documents_submitted": true,
+      "incorporated_before_2017": 0,
+      "has_refreshed_incorporation_documents": true,
+      "process_amex_cards": false,
+      "is_terminal_integration": false,
+      "mfa_is_required": false,
+      "mfa_enforcement_deadline": null,
+      "legal_agreements": null,
+      "has_saved_cards": null,
+      "saved_cards_enabled": null,
+      "passes_fees": null,
+      "direct_debit_enabled": true,
+      "createdAt": "2024-04-08T19:02:46.000Z",
+      "updatedAt": "2024-10-08T13:38:04.000Z"
+    },
+    "terminal_integration_attribute": null,
+    "is_terminal_active": false,
+    "is_dormant": false,
+    "is_registration_type_supported_for_terminal": true,
+    "office_address": {
+      "id": 593502,
+      "street_line_one": "120B jubilation comfort st peseli",
+      "street_line_two": "",
+      "post_code": "",
+      "model": "integration",
+      "model_row": 1182860,
+      "city": "Abuja",
+      "state": "Federal Capital Territory",
+      "country": "Nigeria",
+      "country_iso_code": "NG",
+      "type": "office"
+    },
+    "registered_address": {
+      "id": 593503,
+      "street_line_one": "bh Allstate Bank, Bonny, Rivers State",
+      "street_line_two": "",
+      "post_code": "",
+      "model": "integration",
+      "model_row": 1182860,
+      "city": "Bonny",
+      "state": "Rivers",
+      "country": "Nigeria",
+      "country_iso_code": "NG",
+      "type": "registered"
+    },
+    "available_channels": [
+      "bank",
+      "card",
+      "qr",
+      "ussd",
+      "bank_transfer",
+      "payattitude"
+    ],
+    "agreements": {
+      "settlement_managed_account": {
+        "agreements": [],
+        "visible": false
+      }
+    },
+    "payouts_on_hold_reason": null,
+    "chargeback_emails": null,
+    "logged_in_user_role": {
+      "id": 33,
+      "name": "developer-support",
+      "description": "This role grants users the permissions necessary for providing technical support"
+    }
+  },
+  "token_expiry": 1755429699
+}
